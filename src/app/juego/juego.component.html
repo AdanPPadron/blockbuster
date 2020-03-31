@@ -1,0 +1,37 @@
+<div class="card border-primary text-primary mb-3 mt-3">
+    <div class="card-header">Juegos</div>
+    <div class="card-body text-primary">
+        <div class="my-2 text-left">
+            <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/juegos/form']">Crear Juego</button>
+        </div>
+      <h5 class="card-title">Listado de juegos</h5>
+     
+        <table class="table table-bordered table-striped text-primary">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Categoría</th>
+                    <th>PEGI</th>
+                    <th>Fecha de lanzamiento</th>
+                    <th>Compañía</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let juego of juegos">
+                    <td>{{juego.idJuego}}</td>
+                    <td>{{juego.titulo}}</td>
+                    <td>{{juego.categoria}}</td>
+                    <td>{{juego.pegi}}</td>
+                    <td>{{juego.fecLanzamiento}}</td>
+                    <td><p>{{juego.companias[0].nombre}}</p></td>
+                    <td>
+                        <button class="btn btn-primary"type="button" [routerLink]="['/juegos/form/', juego.idJuego]" routerLinkActive="router-link-active" >Editar</button>
+                        <button class="btn btn-danger ml-2" type="button" (click)="delete(juego.idJuego)" >Borrar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>

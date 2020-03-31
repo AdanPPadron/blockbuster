@@ -1,0 +1,27 @@
+<div class="card border-primary text-primary mb-3 mt-3">
+    <div class="card-header">Clientes</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">Listado de clientes</h5>
+        <div class="my-2 text-left">
+            <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">Crear Cliente</button>
+        </div>
+        <table class="table table-bordered table-striped text-primary">
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Fecha de nacimiento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td>{{cliente.documento}}</td>
+                    <td>{{cliente.nombre}}</td>
+                    <td>{{cliente.correo}}</td>
+                    <td>{{cliente.fechaNac}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>

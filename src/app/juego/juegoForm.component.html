@@ -1,0 +1,75 @@
+<div class="card bg-dark text-white my-3">
+    <div class="card-header">{{ cardTitle }}</div>
+    <div class="card-body">
+        <form>
+            <div class="form-group row">
+                <label for="titulo" class="col-form-label col-sm-3">Título</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="juego.titulo" placeholder="Título"   maxlength="255" name="titulo" #titulo="ngModel" required>                
+                    <div class="alert alert-danger" *ngIf="titulo.invalid && titulo.touched">
+                        <div *ngIf="titulo.errors.required">
+                            Debe rellenar reññenar el título del Juego
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="categoria" class="col-form-label col-sm-3">Categoría</label>
+                <div class="col-sm-6">
+                    <select name="categoria" class="form-control" [(ngModel)]="juego.categoria" required #categoria="ngModel">
+                        <option *ngFor="let categoriaOption of categorias" [ngValue]="categoriaOption.value">{{ categoriaOption.title }}</option>
+                    </select>
+                    <div class="alert alert-danger" *ngIf="categoria.invalid && categoria.touched">
+                        <div *ngIf="categoria.errors.required">
+                            Debe rellenar la categoría del Juego
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="form-group row">
+                <label for="pegi" class="col-form-label col-sm-3">PEGI</label>
+                <div class="col-sm-6">
+                    <input type="number" min="0" max="18" pattern="[0-9]*" class="form-control" [(ngModel)]="juego.pegi" name="pegi" #pegi="ngModel" >                
+                    <div class="alert alert-danger" *ngIf="pegi.invalid && pegi.dirty">
+                        <div *ngIf="pegi.errors.required">
+                            Debe rellenar el PEGI del Juego
+                        </div>
+                        <div *ngIf="pegi.errors.pattern">
+                            El PEGI debe ser un número positivo
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="fecLanz" class="col-form-label col-sm-3">Fecha Lanz.</label>
+                <div class="col-sm-6">
+                    <input type="date" pattern="dd/mm/aaaa" class="form-control" [(ngModel)]="juego.fecLanzamiento" name="fecLanz">                
+                </div>
+            </div>
+            <div class="form-group row" >
+                <label for="compania" class="col-form-label col-sm-3">Compañía</label>
+                <div class="col-sm-6">
+                    <select name="compania" class="form-control" [(ngModel)]="cif" required #categoria="ngModel" required>
+                        <option *ngFor="let compania of companias" [ngValue]="compania.cif">{{ compania.nombre }}</option>
+                    </select>
+                    <div class="alert alert-danger" *ngIf="categoria.invalid && categoria.touched &&categoria.errors.required">
+                        <div *ngIf="categoria.errors.required">
+                            Debe rellenar la compañía del Juego
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!juego.idJuego">Crear</button>
+                    <button class="btn btn-primary" role="button" (click)="update()" *ngIf="juego.idJuego">Editar</button>
+                    <button class="btn btn-secondary" [routerLink]="['/juegos']" routerLinkActive="router-link-active"  type="button">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
