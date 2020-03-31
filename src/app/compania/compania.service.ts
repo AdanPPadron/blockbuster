@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { AlertService } from '../alert/alert.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,11 @@ export class CompaniaService {
 
   private urlEndoPoint:string = 'http://localhost:8090/companias';
   private httpHeaders = new HttpHeaders({'Content-type': 'application/json'});
-  constructor(private http: HttpClient, private alertService: AlertService, private router:Router) { }
+  constructor(private http: HttpClient, private alertService: AlertService, private router:Router, private loginService: LoginService) { }
 
   getCompanias(): Observable<Compania[]>{
     //return of(JUEGOS);
-    return this.http.get(this.urlEndoPoint).pipe(
+    return this.http.get(this.urlEndoPoint, {headers: this.loginService.getAuthHeaders()} ).pipe(
       map( response => response as Compania[] ),catchError(error => {
         console.error(`CompaniaService::getCompanias error: "${error.message}"`);
         if(error.status = 401){

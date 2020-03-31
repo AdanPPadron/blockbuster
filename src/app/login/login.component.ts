@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   credentials:any;
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.credentials={username:'',password:''}
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   login():void{
     console.log(this.credentials);
-    this.router.navigate(['/companies']);
+    this.loginService.save(this.credentials);
+    this.router.navigate(['/companias']);
   }
 
 }
